@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">DK Lab Innovation</string>
+
+    <!-- String values for the theme -->
+    <string name="pref_theme_key" translatable="false">dark</string>
+    <string name="theme_choice">Dark Theme</string>
+
+    <!-- Tell if the instrument is avaliable or not -->
+    <string name="is_avaliable">Avaliable</string>
+    <string name="in_use">In Use</string>
+
+    <string name="sign_out">Sign Out</string>
+    <string name="select_theme">Select the theme</string>
+
+    <!-- Titles for any buttons -->
+    <string name="book_instrument">Book Instrument</string>
+    <string name="instrument_history">View History</string>
+    <string name="instrument_resources">Resources</string>
+
+    <!-- Names for the Instruments -->
+    <string name="instrument_creality_cr10">Creality 3D CR-10</string>
+
+    <!-- Instrument Descriptions -->
+    <string name="description_creality_cr10">Use for printing custom instruments or parts. Use CAD software to design and slice using Cura. Contact Danny Maurer for any questions. </string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/instrumentNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="Instrument Name" />
+
+    <TextView
+        android:id="@+id/instrumentAvaliableTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="Instrument Avaliable" />
+
+</LinearLayout>

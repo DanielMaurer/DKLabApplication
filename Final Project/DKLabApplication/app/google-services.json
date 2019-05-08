@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "575032225435",
+    "firebase_url": "https://dklabapp.firebaseio.com",
+    "project_id": "dklabapp",
+    "storage_bucket": "dklabapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575032225435:android:19981812785bd712",
+        "android_client_info": {
+          "package_name": "com.example.dklabapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575032225435-knob4nikaj32mtnfdmcob1gmlun9avu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh5qleymhsPsNEVGGhO5KLnEKfuvyIhJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575032225435-knob4nikaj32mtnfdmcob1gmlun9avu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575032225435:android:13c3c6a65bcbec53",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575032225435-5oh7j8tv75ptkj7jbt4p96sgpd3k0r67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "61b8ad9729e53f2fd4649df51e3b3ae73c5345f2"
+          }
+        },
+        {
+          "client_id": "575032225435-knob4nikaj32mtnfdmcob1gmlun9avu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh5qleymhsPsNEVGGhO5KLnEKfuvyIhJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575032225435-knob4nikaj32mtnfdmcob1gmlun9avu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
