@@ -64,11 +64,14 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     private class ResourcesClickLister implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), "This button will show you various resources for this instrument", Toast.LENGTH_LONG).show();
-            Uri uri = Uri.parse(instrument.getWebsite());
-            Intent myIntent = new Intent(Intent.ACTION_VIEW, uri);
-            if(myIntent.resolveActivity(getPackageManager())!=null){
-                startActivity(myIntent);
+            if(instrument.getWebsite().equals("N/A")){
+                Toast.makeText(getApplicationContext(), "No website is available for this instrument.", Toast.LENGTH_LONG).show();
+            } else {
+                Uri uri = Uri.parse(instrument.getWebsite());
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, uri);
+                if(myIntent.resolveActivity(getPackageManager())!=null) {
+                    startActivity(myIntent);
+                }
             }
         }
     }
