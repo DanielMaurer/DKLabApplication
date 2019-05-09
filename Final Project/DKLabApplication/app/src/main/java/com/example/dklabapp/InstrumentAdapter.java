@@ -13,23 +13,36 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class InstrumentAdapter extends FirebaseRecyclerAdapter<Instrument, InstrumentAdapter.InstrumentHolder> {
 
-    class InstrumentHolder extends RecyclerView.ViewHolder{
+    class InstrumentHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         // Text Views for the instrument name and if it is avaliable
         private final TextView instrumentNameTextView;
-        private final TextView instrumentAvaliableTextView;
+        private final TextView instrumentAvailableTextView;
 
         InstrumentHolder (View itemView){
             super(itemView);
             instrumentNameTextView = itemView.findViewById(R.id.instrumentNameTextView);
-            instrumentAvaliableTextView = itemView.findViewById(R.id.instrumentAvaliableTextView);
+            instrumentAvailableTextView = itemView.findViewById(R.id.instrumentAvailableTextView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            clickHandler.onClick(adapterPosition);
         }
     }
 
     private Context context;
+    private final InstrumentAdapterOnClickHandler clickHandler;
 
-    public InstrumentAdapter(@NonNull FirebaseRecyclerOptions<Instrument> options){
+    public interface InstrumentAdapterOnClickHandler {
+        void onClick(int position);
+    }
+
+    public InstrumentAdapter(@NonNull FirebaseRecyclerOptions<Instrument> options, InstrumentAdapterOnClickHandler clickHandler){
         super(options);
+        this.clickHandler = clickHandler;
     }
 
     // set the names of what will be in the recycler view
@@ -37,9 +50,9 @@ public class InstrumentAdapter extends FirebaseRecyclerAdapter<Instrument, Instr
     protected void onBindViewHolder(@NonNull InstrumentHolder holder, int position, @NonNull Instrument model) {
         holder.instrumentNameTextView.setText(model.getName());
         if(model.isAvaliable()){
-            holder.instrumentAvaliableTextView.setText(R.string.is_avaliable);
+            holder.instrumentAvailableTextView.setText(R.string.is_avaliable);
         } else {
-            holder.instrumentAvaliableTextView.setText(R.string.in_use);
+            holder.instrumentAvailableTextView.setText(R.string.in_use);
         }
 
     }

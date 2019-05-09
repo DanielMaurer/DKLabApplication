@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -17,12 +18,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements InstrumentAdapter.InstrumentAdapterOnClickHandler {
     private static final int LIST_RATING = 500;
     private int currentTheme;
     private FirebaseDatabase firebaseDatabase;
@@ -30,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private Query query;
+    private String userId;
     private com.example.dklabapp.Settings settings;
+    private InstrumentAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +45,18 @@ public class MainActivity extends AppCompatActivity {
         setTheme(settings.DEFAULT_THEME);
         currentTheme =settings.DEFAULT_THEME;
         setContentView(R.layout.activity_main);
-
         RecyclerView recyclerView=findViewById(R.id.recyclerview); // recycler view with the desired layout
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // have it be a linear layout
 
-        firebaseDatabase = FirebaseDatabase.getInstance(); // get instance to the firebase database
-        query = firebaseDatabase.getReference().child("instruments").orderByChild("name");
+        //firebaseDatabase = FirebaseDatabase.getInstance(); // get instance to the firebase database
+        //query = firebaseDatabase.getReference().child("instruments").orderByChild("name");
 
         FirebaseRecyclerOptions<Instrument> options =
                 new FirebaseRecyclerOptions.Builder<Instrument>().setQuery(query, Instrument.class).build();
-        firebaseRecyclerAdapter = new InstrumentAdapter(options);
+        //firebaseRecyclerAdapter = new InstrumentAdapter(options);
 
         // THIS IS WHERE THE CODE WOULD GO FOR THE FAB TO POTENTIALLY ADD AN INSTRUMENT
+
 
         FirebaseApp.initializeApp(this);
 
@@ -61,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) { // if there is no user
+                if(user != null) {
+                    userId = user.getUid();
+                } else{
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
@@ -76,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public void onClick(int position) {
+        Intent detailIntent = new Intent(this, InstrumentDetailActivity.class);
+        detailIntent.putExtra("uid", userId); // TODO: Implement user id
+        DatabaseReference ref = adapter.getRef(position);
+        String id = ref.getKey();
+        detailIntent.putExtra("ref", id);
+        startActivity(detailIntent);
+    }
 
     @Override
     protected void onPause() {
