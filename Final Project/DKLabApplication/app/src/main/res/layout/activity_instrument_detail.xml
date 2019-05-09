@@ -53,7 +53,7 @@
         android:id="@+id/dklablogo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="right"
+        android:layout_gravity="bottom|right"
         android:cropToPadding="false"
         android:src="@drawable/dk_lab_logo_2018" />
 </LinearLayout>

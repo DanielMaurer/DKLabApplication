@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,14 +27,10 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements InstrumentAdapter.InstrumentAdapterOnClickHandler {
     private static final int LIST_RATING = 500;
-    private int currentTheme;
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseRecyclerAdapter<Instrument, InstrumentAdapter.InstrumentHolder> firebaseRecyclerAdapter;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private Query query;
+    private RecyclerView recyclerView;
     private String userId;
-    private com.example.dklabapp.Settings settings;
     private InstrumentAdapter adapter;
 
 
@@ -41,27 +38,30 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings.setPreferences(this);
-        setTheme(settings.DEFAULT_THEME);
-        currentTheme =settings.DEFAULT_THEME;
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView=findViewById(R.id.recyclerview); // recycler view with the desired layout
+        recyclerView=findViewById(R.id.recyclerview); // recycler view with the desired layout
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // have it be a linear layout
 
-        //firebaseDatabase = FirebaseDatabase.getInstance(); // get instance to the firebase database
-        //query = firebaseDatabase.getReference().child("instruments").orderByChild("name");
-
-        FirebaseRecyclerOptions<Instrument> options =
-                new FirebaseRecyclerOptions.Builder<Instrument>().setQuery(query, Instrument.class).build();
-        //firebaseRecyclerAdapter = new InstrumentAdapter(options);
-
-        // THIS IS WHERE THE CODE WOULD GO FOR THE FAB TO POTENTIALLY ADD AN INSTRUMENT
-
-
         FirebaseApp.initializeApp(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            userId = user.getUid();
+            setAdapter();
+        }
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddInstrumentActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // Singleton to see if the user is signed in
-        firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -97,14 +97,12 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
     protected void onPause() {
         super.onPause();
         firebaseAuth.removeAuthStateListener(authStateListener);
-        firebaseRecyclerAdapter.stopListening();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         firebaseAuth.addAuthStateListener(authStateListener); // add the auth state listener after being resumed
-        firebaseRecyclerAdapter.startListening();
     }
 
     @Override
@@ -118,10 +116,6 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings: // TODO: Create action settings layout
-                Intent startSettingsActivity = new Intent(this, SettingsActivity.class); // TODO: Create SettingsActivity class
-                startActivity(startSettingsActivity);
-                return true;
             case R.id.sign_out: // TODO: Create sign_out in options menu XML file
                 AuthUI.getInstance().signOut(this); // gives a menu item so sign out
             default:
@@ -132,10 +126,25 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_OK && requestCode == LIST_RATING){
-            int instrumentID = 0; // TODO: Figure out what this does
-
+        if(requestCode == LIST_RATING){
+            if(resultCode == LIST_RATING){
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    userId = user.getUid();
+                }
+                setAdapter();
+            }if(resultCode == RESULT_CANCELED){
+                finish();
+            }
         }
+    }
+
+    private void setAdapter(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        Query query = firebaseDatabase.getReference().child("to_do").orderByChild("uid").equalTo(userId);
+        FirebaseRecyclerOptions<Instrument> options = new FirebaseRecyclerOptions.Builder<Instrument>().setQuery(query, Instrument.class).build();
+        adapter = new InstrumentAdapter(options, this);
+        recyclerView.setAdapter(adapter);
     }
 
 

@@ -25,7 +25,6 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(Settings.DEFAULT_THEME);
         setContentView(R.layout.activity_instrument_detail);
 
         // Button to book the instrument

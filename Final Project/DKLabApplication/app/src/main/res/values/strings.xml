@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">DK Lab Innovation</string>
+    <string name="instrument_name">Instrument Name</string>
+    <string name="instrument_id">Instrument ID</string>
+    <string name="instrument_description">Instrument Description</string>
+    <string name="instrument_website">Instrument Website</string>
+    <string name="availability_button">Change Availability</string>
 
     <!-- String values for the theme -->
     <string name="pref_theme_key" translatable="false">dark</string>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        description
+        website
+
+        <EditText
+            android:id="@+id/instrumentNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/instrument_name"
+            android:layout_margin="3dp" />
+
+        <EditText
+            android:id="@+id/instrumentIdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/instrument_id"
+            android:layout_margin="3dp" />
+
+        <EditText
+            android:id="@+id/instrumentDescriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/instrument_description"
+            android:layout_margin="3dp" />
+
+        <EditText
+            android:id="@+id/instrumentWebsiteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/instrument_website"
+            android:layout_margin="3dp" />
+
+        <Button
+            android:id="@+id/availableButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/availability_button"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Rating"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+</ScrollView>

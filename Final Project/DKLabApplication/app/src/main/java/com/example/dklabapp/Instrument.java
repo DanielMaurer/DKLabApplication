@@ -7,7 +7,7 @@ public class Instrument {
     private int instrumentID;
     private String description;
     private String website;
-    private String[] youtubeTutorials;
+    //private String[] youtubeTutorials;
     private boolean avaliable;
 
     // Getters and setters
@@ -43,13 +43,13 @@ public class Instrument {
         this.website = website;
     }
 
-    public String[] getYoutubeTutorials() {
+    /*public String[] getYoutubeTutorials() {
         return youtubeTutorials;
     }
 
     public void setYoutubeTutorials(String[] youtubeTutorials) {
         this.youtubeTutorials = youtubeTutorials;
-    }
+    } */
     public boolean isAvaliable() {
         return avaliable;
     }
@@ -57,14 +57,20 @@ public class Instrument {
         this.avaliable = avaliable;
     }
 
-    public Instrument(String name, int instrumentID, String description, String website, String[] youtubeTutorials, boolean avaliable) {
+    public Instrument(String name, int instrumentID, String description, String website, boolean avaliable) { //String[] youtubeTutorials,
         this.name = name;
         this.instrumentID = instrumentID;
         this.description = description;
         this.website = website;
-        this.youtubeTutorials = youtubeTutorials;
         this.avaliable = avaliable;
+        //this.youtubeTutorials = youtubeTutorials;
     }
 
-
+    public Instrument() {
+        this.name = "";
+        this.instrumentID = 0;
+        this.description = "";
+        this.website = "";
+        this.avaliable = true;
+    }
 }
