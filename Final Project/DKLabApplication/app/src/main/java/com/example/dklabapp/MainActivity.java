@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
 
     private void setAdapter(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        Query query = firebaseDatabase.getReference().child("to_do").orderByChild("uid").equalTo(userId);
+        Query query = firebaseDatabase.getReference().child("instruments");
         FirebaseRecyclerOptions<Instrument> options = new FirebaseRecyclerOptions.Builder<Instrument>().setQuery(query, Instrument.class).build();
         adapter = new InstrumentAdapter(options, this);
         recyclerView.setAdapter(adapter);

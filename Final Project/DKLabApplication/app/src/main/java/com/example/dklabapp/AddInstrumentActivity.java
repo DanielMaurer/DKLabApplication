@@ -25,7 +25,7 @@ public class AddInstrumentActivity extends AppCompatActivity {
     private EditText descriptionEditText;
     private EditText websiteEditText;
 
-    private Button availableButton;
+    //private Button availableButton;
     private Button submitButton;
 
     private FirebaseDatabase firebaseDatabase;
@@ -36,7 +36,9 @@ public class AddInstrumentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("dklabapp");
+        databaseReference = firebaseDatabase.getReference().child("instruments");
+
+        setContentView(R.layout.activity_add_instrument);
 
         instrument = new Instrument();
 
@@ -52,8 +54,8 @@ public class AddInstrumentActivity extends AppCompatActivity {
         websiteEditText.addTextChangedListener(new NameTextListener(websiteEditText));
 
         // for buttons
-        availableButton = findViewById(R.id.availableButton);
-        availableButton.setOnClickListener(new AvailableClickListener());
+        /*availableButton = findViewById(R.id.availableButton);
+        availableButton.setOnClickListener(new AvailableClickListener());*/
         submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new SubmitClickListener());
     }
@@ -89,7 +91,7 @@ public class AddInstrumentActivity extends AppCompatActivity {
         }
     }
 
-    private class AvailableClickListener implements View.OnClickListener{
+    /*private class AvailableClickListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             boolean available = instrument.isAvaliable();
@@ -99,7 +101,7 @@ public class AddInstrumentActivity extends AppCompatActivity {
                 instrument.setAvaliable(true);
             }
         }
-    }
+    }*/
 
     private class SubmitClickListener implements View.OnClickListener{
         @Override

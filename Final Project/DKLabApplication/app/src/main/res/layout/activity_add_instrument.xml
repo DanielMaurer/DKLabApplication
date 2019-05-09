@@ -44,18 +44,20 @@
             android:hint="@string/instrument_website"
             android:layout_margin="3dp" />
 
+        <!--
         <Button
             android:id="@+id/availableButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/availability_button"
             android:layout_margin="20dp"/>
+            -->
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit Rating"
+            android:text="Submit Instrument"
             android:layout_margin="20dp"/>
     </LinearLayout>
 </ScrollView>
