@@ -1,5 +1,7 @@
 package com.example.dklabapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -43,8 +45,12 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     private class BookInstrumentClickListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            instrument.setAvaliable(false); // set the instument to in use
             Toast.makeText(getApplicationContext(), "This instrument is now marked as in use.", Toast.LENGTH_LONG).show();
+            if(instrument.isAvaliable()){
+                instrument.setAvaliable(false);
+            } else {
+                instrument.setAvaliable(true);
+            }
         }
     }
 
@@ -58,7 +64,12 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     private class ResourcesClickLister implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), "This button will show you various resourses for this instrument", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "This button will show you various resources for this instrument", Toast.LENGTH_LONG).show();
+            Uri uri = Uri.parse(instrument.getWebsite());
+            Intent myIntent = new Intent(Intent.ACTION_VIEW, uri);
+            if(myIntent.resolveActivity(getPackageManager())!=null){
+                startActivity(myIntent);
+            }
         }
     }
 }
