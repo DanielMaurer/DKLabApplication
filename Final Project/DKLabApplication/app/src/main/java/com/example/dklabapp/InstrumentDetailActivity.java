@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -21,13 +22,24 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     private Button viewHistoryButton;
     private Button resourcesButton;
 
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    //private FirebaseDatabase firebaseDatabase;
+    //private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrument_detail);
+
+        Intent intent = getIntent();
+        instrument = intent.getParcelableExtra("instrument");
+
+        if(instrument != null){
+            TextView instrumentNameTextView = findViewById(R.id.instrumentNameTextView);
+            instrumentNameTextView.setText(instrument.getName());
+
+            TextView instrumentDescriptionTextView = findViewById(R.id.instrumentDescriptionTextView);
+            instrumentDescriptionTextView.setText(instrument.getDescription());
+        }
 
         // Button to book the instrument
         bookInstrumentButton = findViewById(R.id.bookInstrumentButton);

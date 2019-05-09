@@ -85,11 +85,13 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
 
     @Override
     public void onClick(int position) {
+        Instrument instrument = adapter.getItem(position);
         Intent detailIntent = new Intent(this, InstrumentDetailActivity.class);
         detailIntent.putExtra("uid", userId); // TODO: Implement user id
         DatabaseReference ref = adapter.getRef(position);
         String id = ref.getKey();
         detailIntent.putExtra("ref", id);
+        detailIntent.putExtra("instrument", instrument);
         startActivity(detailIntent);
     }
 
@@ -97,12 +99,14 @@ public class MainActivity extends AppCompatActivity implements InstrumentAdapter
     protected void onPause() {
         super.onPause();
         firebaseAuth.removeAuthStateListener(authStateListener);
+        adapter.stopListening();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         firebaseAuth.addAuthStateListener(authStateListener); // add the auth state listener after being resumed
+        adapter.startListening();
     }
 
     @Override
