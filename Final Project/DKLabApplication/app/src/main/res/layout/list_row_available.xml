@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:padding="5dp"
+        android:layout_gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         tools:text="Instrument Avaliable" />
 

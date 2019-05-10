@@ -1,9 +1,6 @@
 package com.example.dklabapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Instrument implements Parcelable {
+public class Instrument {
     private String name;
     private int instrumentID;
     private String description;
@@ -74,39 +71,4 @@ public class Instrument implements Parcelable {
         this.website = "";
         this.avaliable = true;
     }
-
-    protected Instrument(Parcel in) {
-        name = in.readString();
-        instrumentID = in.readInt();
-        description = in.readString();
-        website = in.readString();
-        avaliable = in.readByte() != 0x00;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeInt(instrumentID);
-        dest.writeString(description);
-        dest.writeString(website);
-        dest.writeByte((byte) (avaliable ? 0x01 : 0x00));
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Instrument> CREATOR = new Parcelable.Creator<Instrument>() {
-        @Override
-        public Instrument createFromParcel(Parcel in) {
-            return new Instrument(in);
-        }
-
-        @Override
-        public Instrument[] newArray(int size) {
-            return new Instrument[size];
-        }
-    };
 }

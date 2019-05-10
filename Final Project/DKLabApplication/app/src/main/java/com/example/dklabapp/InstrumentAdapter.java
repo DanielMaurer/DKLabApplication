@@ -64,7 +64,7 @@ public class InstrumentAdapter extends FirebaseRecyclerAdapter<Instrument, Instr
     public InstrumentHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.list_row, viewGroup, false); // TODO: Create list_row layout
+        View view = inflater.inflate(R.layout.list_row_available, viewGroup, false); // TODO: Create list_row_available layout
         return new InstrumentAdapter.InstrumentHolder(view);
 
     }

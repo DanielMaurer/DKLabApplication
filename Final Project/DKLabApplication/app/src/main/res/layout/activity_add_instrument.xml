@@ -9,9 +9,6 @@
         android:layout_height="wrap_content"
         >
 
-        description
-        website
-
         <EditText
             android:id="@+id/instrumentNameEditText"
             android:layout_width="match_parent"
