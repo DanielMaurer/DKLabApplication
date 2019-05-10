@@ -48,7 +48,6 @@ public class InstrumentAdapter extends FirebaseRecyclerAdapter<Instrument, Instr
     // set the names of what will be in the recycler view
     @Override
     protected void onBindViewHolder(@NonNull InstrumentHolder holder, int position, @NonNull Instrument model) {
-        Instrument instrument = model;
         holder.instrumentNameTextView.setText(model.getName());
         if(model.isAvaliable()){
             holder.instrumentAvailableTextView.setText(R.string.is_avaliable);

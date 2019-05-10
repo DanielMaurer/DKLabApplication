@@ -29,6 +29,7 @@ public class InstrumentDetailActivity extends AppCompatActivity {
     private String ref;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private HistoryAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class InstrumentDetailActivity extends AppCompatActivity {
         public void onClick(View v) {
             Toast.makeText(getApplicationContext(), "This button will let you view the history of the instrument", Toast.LENGTH_LONG).show();
             Intent historyIntent = new Intent(getApplicationContext(), InstrumentHistoryActivity.class);
+            startActivity(historyIntent);
 
 
         }
